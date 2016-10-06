@@ -1,3 +1,7 @@
+Este proyecto fue creado para aprender a programar con React.
+
+This project was created for learn to develop with React
+
 *package.json*: {
 	"devDependencies": Todas las dependencias que se estan utilizando,
 	"scripts": {

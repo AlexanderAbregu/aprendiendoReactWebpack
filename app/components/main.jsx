@@ -1,6 +1,69 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+// Campos de tabla, FILA
+import ListaMascota from "./componentes/lista.jsx";
+
+class ClasePpal extends React.Component{
+	constructor(props){
+			super(props);
+		}
+
+	render(){
+		return (<div className="table bordered">
+				<ListaMascota />
+				{
+					this.props.mascotas.map((pet) => {
+						return <div className="filaPet">
+								<div>
+									<p> {pet.name} - {pet.tipe}</p>
+								</div>
+						</div>
+					})
+				}
+			</div>)
+		}
+}
+
+// Propiedades
+ClasePpal.defaultProps = {
+	mascotas: [{
+		name: "Phirulais",
+		tipe: "dog",
+		color: "brown",
+		age: 3,
+		picture: ""
+	},{
+		name: "Mishifus",
+		tipe: "cat",
+		color: "gray",
+		age: 2,
+		picture: ""
+	},{
+		name: "Alex",
+		tipe: "lion",
+		color: "yellow",
+		age: 4,
+		picture: ""
+	},{
+		name: "Macri",
+		tipe: "cat",
+		color: "black",
+		age: 5,
+		picture: ""
+	}]
+}
+
+ReactDOM.render(
+	<ClasePpal name="Alexander" />,
+	document.getElementById("contenedorReact")
+)
+
+/*
+
+import React from "react";
+import ReactDOM from "react-dom";
+
 class ClaseHolaMundo extends React.Component{
 	constructor(props){
 		super(props);
@@ -109,18 +172,6 @@ ClaseHolaMundo.defaultProps = {
 
 ReactDOM.render(
 	<ClaseHolaMundo name="Alexander" />,
-	document.getElementById("contenedorReact")
-)
-
-/*
-//Para el componentWillReceiveProps pero el push se convierte en undefined despues de su primera ejecucion
-ReactDOM.render(
-	<ClaseHolaMundo name="Alexander 2" />,
-	document.getElementById("contenedorReact")
-)
-
-ReactDOM.render(
-	<ClaseHolaMundo name="Alexander 3" />,
 	document.getElementById("contenedorReact")
 )
 */

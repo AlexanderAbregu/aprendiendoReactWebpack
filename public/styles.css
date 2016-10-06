@@ -1,0 +1,12 @@
+.table{
+	width:400px;
+	padding:10px;
+	font-family: Verdana
+}
+.bordered{
+	border: 1px solid black;
+}
+.center100p{
+	width:100%;
+	text-align: center;
+}

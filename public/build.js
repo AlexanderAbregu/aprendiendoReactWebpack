@@ -56,6 +56,10 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
+	var _lista = __webpack_require__(172);
+
+	var _lista2 = _interopRequireDefault(_lista);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -64,16 +68,93 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var ClaseHolaMundo = function (_React$Component) {
-		_inherits(ClaseHolaMundo, _React$Component);
+	// Campos de tabla, FILA
 
-		function ClaseHolaMundo(props) {
-			_classCallCheck(this, ClaseHolaMundo);
 
+	var ClasePpal = function (_React$Component) {
+		_inherits(ClasePpal, _React$Component);
+
+		function ClasePpal(props) {
+			_classCallCheck(this, ClasePpal);
+
+			return _possibleConstructorReturn(this, (ClasePpal.__proto__ || Object.getPrototypeOf(ClasePpal)).call(this, props));
+		}
+
+		_createClass(ClasePpal, [{
+			key: "render",
+			value: function render() {
+				return _react2.default.createElement(
+					"div",
+					{ className: "table bordered" },
+					_react2.default.createElement(_lista2.default, null),
+					this.props.mascotas.map(function (pet) {
+						return _react2.default.createElement(
+							"div",
+							{ className: "filaPet" },
+							_react2.default.createElement(
+								"div",
+								null,
+								_react2.default.createElement(
+									"p",
+									null,
+									" ",
+									pet.name,
+									" - ",
+									pet.tipe
+								)
+							)
+						);
+					})
+				);
+			}
+		}]);
+
+		return ClasePpal;
+	}(_react2.default.Component);
+
+	// Propiedades
+
+
+	ClasePpal.defaultProps = {
+		mascotas: [{
+			name: "Phirulais",
+			tipe: "dog",
+			color: "brown",
+			age: 3,
+			picture: ""
+		}, {
+			name: "Mishifus",
+			tipe: "cat",
+			color: "gray",
+			age: 2,
+			picture: ""
+		}, {
+			name: "Alex",
+			tipe: "lion",
+			color: "yellow",
+			age: 4,
+			picture: ""
+		}, {
+			name: "Macri",
+			tipe: "cat",
+			color: "black",
+			age: 5,
+			picture: ""
+		}]
+	};
+
+	_reactDom2.default.render(_react2.default.createElement(ClasePpal, { name: "Alexander" }), document.getElementById("contenedorReact"));
+
+	/*
+
+	import React from "react";
+	import ReactDOM from "react-dom";
+
+	class ClaseHolaMundo extends React.Component{
+		constructor(props){
+			super(props);
 			// Estados, (solo se definen en el interior del componente)
-			var _this = _possibleConstructorReturn(this, (ClaseHolaMundo.__proto__ || Object.getPrototypeOf(ClaseHolaMundo)).call(this, props));
-
-			_this.state = {
+			this.state = {
 				segundoApellido: "Abregu",
 				mensaje: "Clickea el boton si tenes hu... e.e",
 				cambiosEnProps: [],
@@ -82,197 +163,101 @@
 
 			// Metodo principal para hacer cambios en la interfaz de usuario
 			// Establezco el this de la funcion como el this de React (creo)
-			_this.update = _this.update.bind(_this);
-			_this.sumar = _this.sumar.bind(_this);
-			return _this;
+			this.update = this.update.bind(this);
+			this.sumar = this.sumar.bind(this);
 		}
 
 		// Se comunica con this.update para actualizar
+		update(){
+			this.setState({mensaje: "Que Jirafas haces por aca?"});
+		}
 
+		sumar(){
+			this.setState({sumar: this.state.sumar+1});
+		}
 
-		_createClass(ClaseHolaMundo, [{
-			key: "update",
-			value: function update() {
-				this.setState({ mensaje: "Que Jirafas haces por aca?" });
-			}
-		}, {
-			key: "sumar",
-			value: function sumar() {
-				this.setState({ sumar: this.state.sumar + 1 });
-			}
+		// Se ejecuta cuando el componente se va a montar (constructor() se ejecuta antes que esto)
+		componentWillMount(){
+			this.setState({montando: new Date().getTime()})
+		}
 
-			// Se ejecuta cuando el componente se va a montar (constructor() se ejecuta antes que esto)
+		// Se ejecuta inmediatamente despues de que sea montado el DOM, se suele utilizar para hacer peticiones AJAX o para integrar con otras bibliotecas
+		componentDidMount(){
+			this.setState({seMonto: new Date().getTime()})
+		}
 
-		}, {
-			key: "componentWillMount",
-			value: function componentWillMount() {
-				this.setState({ montando: new Date().getTime() });
-			}
+		// Se ejecuta cada vez que un componente recibe  nuevas "props". NO se invoca en el primer render
+		componentWillReceiveProps(nextProps){
+			// MODIFICAR ESTO.
+			// La idea es que cada vez que cambie una propiedad pushee en un array ALGO
+			//this.setState({cambiosEnProps: this.state.cambiosEnProps.push("Cambio a la " + ( new Date().getTime() ) ) })
+			console.log('nextProps ',nextProps.name);
+	    		console.log('props ',this.props.name);
+	    		console.log(this.state.cambiosEnProps);
+		}
 
-			// Se ejecuta inmediatamente despues de que sea montado el DOM, se suele utilizar para hacer peticiones AJAX o para integrar con otras bibliotecas
+		// Se ejecuta antes del render para PREGUNTAR si debe o no ejecutar
+		// Siempre devuelve true pero si retornara false no se va a ejecutar el render  y no volvera  a comprobar hasta que ocurra otro cambio en props o states
+		// Cada vez que ejecute sumar va a pasar por aca
+		shouldComponentUpdate( nextProps, nextState ){
+	    		// Si el nuevo numero es para retornara true y renderizara el DOM caso contrario le kb
+	    		return nextState.sumar % 2 == 0;
+	  	}
 
-		}, {
-			key: "componentDidMount",
-			value: function componentDidMount() {
-				this.setState({ seMonto: new Date().getTime() });
-			}
+	  	// Se invoca antes que render, se suele utilizar para realizar procesos que que se necesita ejecutar antes de una actualizacion
+	  	// No se debe utilizar this.setState() ya que generaria un bucle "infinito"
+	  	componentWillUpdate(){
+	  		// Propiedades
+	  		console.log("\n\t Inicio Update: " + new Date().getTime() + "\n");
+	   	}
 
-			// Se ejecuta cada vez que un componente recibe  nuevas "props". NO se invoca en el primer render
+	   	// Se invoca despues que el render. Osea despues de que el componente cambio
+	   	// No se debe utilizar this.setState() ya que generaria un bucle "infinito"
+	   	componentDidUpdate(prevProps,prevState){
+	    		console.log("\n\t Fin Update: " + new Date().getTime() + "\n");
+	  	}
 
-		}, {
-			key: "componentWillReceiveProps",
-			value: function componentWillReceiveProps(nextProps) {
-				// MODIFICAR ESTO.
-				// La idea es que cada vez que cambie una propiedad pushee en un array ALGO
-				//this.setState({cambiosEnProps: this.state.cambiosEnProps.push("Cambio a la " + ( new Date().getTime() ) ) })
-				console.log('nextProps ', nextProps.name);
-				console.log('props ', this.props.name);
-				console.log(this.state.cambiosEnProps);
-			}
+	  	// Se invoca antes de que un componente sea desmontado del DOM
+	  	componentWillUnmount(){
+	  		this.setState({inicioDesmontaje: new Date().getTime()});
+	  	}
 
-			// Se ejecuta antes del render para PREGUNTAR si debe o no ejecutar
-			// Siempre devuelve true pero si retornara false no se va a ejecutar el render  y no volvera  a comprobar hasta que ocurra otro cambio en props o states
-			// Cada vez que ejecute sumar va a pasar por aca
+	  	// No llamar a las funciones mount y unmount
+	  	mount(){
+	    		ReactDOM.render(<MyComponent />,document.getElementById('component'));
+	  	}
 
-		}, {
-			key: "shouldComponentUpdate",
-			value: function shouldComponentUpdate(nextProps, nextState) {
-				// Si el nuevo numero es para retornara true y renderizara el DOM caso contrario le kb
-				return nextState.sumar % 2 == 0;
-			}
+	  	unmount(){
+	    		ReactDOM.unmountComponentAtNode(document.getElementById('component'));
+	 	}
 
-			// Se invoca antes que render, se suele utilizar para realizar procesos que que se necesita ejecutar antes de una actualizacion
-			// No se debe utilizar this.setState() ya que generaria un bucle "infinito"
-
-		}, {
-			key: "componentWillUpdate",
-			value: function componentWillUpdate() {
-				// Propiedades
-				console.log("\n\t Inicio Update: " + new Date().getTime() + "\n");
-			}
-
-			// Se invoca despues que el render. Osea despues de que el componente cambio
-			// No se debe utilizar this.setState() ya que generaria un bucle "infinito"
-
-		}, {
-			key: "componentDidUpdate",
-			value: function componentDidUpdate(prevProps, prevState) {
-				console.log("\n\t Fin Update: " + new Date().getTime() + "\n");
-			}
-
-			// Se invoca antes de que un componente sea desmontado del DOM
-
-		}, {
-			key: "componentWillUnmount",
-			value: function componentWillUnmount() {
-				this.setState({ inicioDesmontaje: new Date().getTime() });
-			}
-
-			// No llamar a las funciones mount y unmount
-
-		}, {
-			key: "mount",
-			value: function mount() {
-				_reactDom2.default.render(_react2.default.createElement(MyComponent, null), document.getElementById('component'));
-			}
-		}, {
-			key: "unmount",
-			value: function unmount() {
-				_reactDom2.default.unmountComponentAtNode(document.getElementById('component'));
-			}
-		}, {
-			key: "render",
-			value: function render() {
-				//Todas las etiquetas tienen que cerrarse o autocerrarse <br/>
-				return _react2.default.createElement(
-					"div",
-					null,
-					_react2.default.createElement(
-						"div",
-						null,
-						" Empiezo Montar: ",
-						this.state.montando,
-						" "
-					),
-					_react2.default.createElement(
-						"div",
-						null,
-						" Termino Montar: ",
-						this.state.seMonto,
-						" "
-					),
-					_react2.default.createElement("br", null),
-					_react2.default.createElement(
-						"div",
-						null,
-						" Inicio Desmontaje: ",
-						this.state.inicioDesmontaje,
-						" "
-					),
-					_react2.default.createElement(
-						"div",
-						null,
-						" Fin Desmontaje: ",
-						this.state.finDesmontaje,
-						" "
-					),
-					_react2.default.createElement("br", null),
-					_react2.default.createElement(
-						"div",
-						null,
-						" Ola ke ace ",
-						this.props.name,
-						" ",
-						this.props.apellido,
-						" ",
-						this.state.segundoApellido,
-						"! "
-					),
-					_react2.default.createElement("br", null),
-					_react2.default.createElement(
-						"div",
-						null,
-						" ",
-						this.state.mensaje,
-						" "
-					),
-					_react2.default.createElement("br", null),
-					_react2.default.createElement(
-						"button",
-						{ onClick: this.update },
-						"Clickeame"
-					),
-					_react2.default.createElement(
-						"button",
-						{ onClick: this.sumar },
-						this.state.sumar
-					)
-				);
-				// onClick={this.update} Ejecuta la funcion update() que CREO que va al constructor y actualiza o algo asi
-			}
-		}]);
-
-		return ClaseHolaMundo;
-	}(_react2.default.Component);
+		render(){
+			//Todas las etiquetas tienen que cerrarse o autocerrarse <br/>
+			return (<div>
+					<div> Empiezo Montar: {this.state.montando} </div>
+					<div> Termino Montar: {this.state.seMonto} </div>
+					<br/>
+					<div> Inicio Desmontaje: {this.state.inicioDesmontaje} </div>
+					<div> Fin Desmontaje: {this.state.finDesmontaje} </div>
+					<br/>
+					<div> Ola ke ace {this.props.name} {this.props.apellido} {this.state.segundoApellido}! </div>
+					<br/>
+					<div> {this.state.mensaje} </div>
+					<br/>
+					<button onClick={this.update}>Clickeame</button>
+					<button onClick={this.sumar}>{this.state.sumar}</button>
+				</div>)
+			// onClick={this.update} Ejecuta la funcion update() que CREO que va al constructor y actualiza o algo asi
+		}
+	}
 
 	// Propiedades
-
-
 	ClaseHolaMundo.defaultProps = {
 		apellido: "Armua"
-	};
-
-	_reactDom2.default.render(_react2.default.createElement(ClaseHolaMundo, { name: "Alexander" }), document.getElementById("contenedorReact"));
-
-	/*
-	//Para el componentWillReceiveProps pero el push se convierte en undefined despues de su primera ejecucion
-	ReactDOM.render(
-		<ClaseHolaMundo name="Alexander 2" />,
-		document.getElementById("contenedorReact")
-	)
+	}
 
 	ReactDOM.render(
-		<ClaseHolaMundo name="Alexander 3" />,
+		<ClaseHolaMundo name="Alexander" />,
 		document.getElementById("contenedorReact")
 	)
 	*/
@@ -21643,6 +21628,55 @@
 
 	module.exports = ReactDOMNullInputValuePropHook;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 172 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ListaMascota = function (_React$Component) {
+		_inherits(ListaMascota, _React$Component);
+
+		function ListaMascota() {
+			_classCallCheck(this, ListaMascota);
+
+			return _possibleConstructorReturn(this, (ListaMascota.__proto__ || Object.getPrototypeOf(ListaMascota)).apply(this, arguments));
+		}
+
+		_createClass(ListaMascota, [{
+			key: "render",
+			value: function render() {
+				return _react2.default.createElement(
+					"div",
+					{ className: "center100p" },
+					"Lista de Mascotas."
+				);
+			}
+		}]);
+
+		return ListaMascota;
+	}(_react2.default.Component);
+
+	exports.default = ListaMascota;
 
 /***/ }
 /******/ ]);
