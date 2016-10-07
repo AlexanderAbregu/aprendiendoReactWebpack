@@ -2,7 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 // Campos de tabla, FILA
-import ListaMascota from "./componentes/lista.jsx";
+import TituloLista from "./componentes/tituloLista.jsx";
+import FilaLista from "./componentes/filaLista.jsx";
 
 class ClasePpal extends React.Component{
 	constructor(props){
@@ -10,17 +11,11 @@ class ClasePpal extends React.Component{
 		}
 
 	render(){
-		return (<div className="table bordered">
-				<ListaMascota />
-				{
-					this.props.mascotas.map((pet) => {
-						return <div className="filaPet">
-								<div>
-									<p> {pet.name} - {pet.tipe}</p>
-								</div>
-						</div>
-					})
-				}
+		return (
+			<div className="table bordered">
+				<TituloLista />
+				<br/>
+				<FilaLista data={this.props.mascotas} />
 			</div>)
 		}
 }
@@ -28,34 +23,38 @@ class ClasePpal extends React.Component{
 // Propiedades
 ClasePpal.defaultProps = {
 	mascotas: [{
+		id: "1",
 		name: "Phirulais",
 		tipe: "dog",
 		color: "brown",
 		age: 3,
-		picture: ""
+		picture: "https://www.cesarsway.com/sites/newcesarsway/files/styles/large_article_preview/public/Common-dog-behaviors-explained.jpg?itok=FSzwbBoi"
 	},{
+		id: "2",
 		name: "Mishifus",
 		tipe: "cat",
 		color: "gray",
 		age: 2,
-		picture: ""
+		picture: "https://www.petfinder.com/wp-content/uploads/2012/11/91615172-find-a-lump-on-cats-skin-632x475.jpg"
 	},{
+		id: "3",
 		name: "Alex",
 		tipe: "lion",
 		color: "yellow",
 		age: 4,
-		picture: ""
+		picture: "http://efdreams.com/data_images/dreams/lion/lion-03.jpg"
 	},{
+		id: "4",
 		name: "Macri",
 		tipe: "cat",
 		color: "black",
 		age: 5,
-		picture: ""
+		picture: "http://elcorresponsalweb.com.ar/wp-content/uploads/2016/05/mauricio-macri-presidente.jpg"
 	}]
 }
 
 ReactDOM.render(
-	<ClasePpal name="Alexander" />,
+	<ClasePpal />,
 	document.getElementById("contenedorReact")
 )
 

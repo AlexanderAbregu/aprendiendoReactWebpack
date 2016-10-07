@@ -1,12 +1,57 @@
 .table{
 	width:400px;
 	padding:10px;
-	font-family: Verdana
+	font-family: Verdana;
+	border-radius:15px;
 }
 .bordered{
 	border: 1px solid black;
+	border-radius: 5px;
 }
 .center100p{
 	width:100%;
 	text-align: center;
+}
+.paddTopBot{
+	padding: 7px 0;
+}
+.fotoMascota{
+	width: 125px;
+}
+.filaMascota > div {
+	display: inline-block;
+	margin-bottom:15px;
+}
+.imagenMascota{
+	width: 100%;
+	border-radius: 6px;
+}
+.nombreMascota{
+	font-size:1.3em;
+}
+.mitad{
+	display:inline-block;
+	width:47%;
+}
+.camposMascota{
+	padding-left:20px;
+	vertical-align: top;
+}
+.camposMascota > div {
+	width:240px;
+}
+.boldLetra{
+	font-weight: bold;
+}
+.colorMascota{
+	border-radius:3px;
+	padding-left:5px;
+	padding-bottom: 2px;
+	-webkit-text-stroke: 1px gray;
+	font-size:1.1em;
+	text-align: center;
+	color: white;
+}
+.tipoMascota{
+	font-size:1.1em;
 }

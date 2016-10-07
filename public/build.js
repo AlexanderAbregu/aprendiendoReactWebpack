@@ -56,9 +56,13 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _lista = __webpack_require__(172);
+	var _tituloLista = __webpack_require__(172);
 
-	var _lista2 = _interopRequireDefault(_lista);
+	var _tituloLista2 = _interopRequireDefault(_tituloLista);
+
+	var _filaLista = __webpack_require__(173);
+
+	var _filaLista2 = _interopRequireDefault(_filaLista);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -86,25 +90,9 @@
 				return _react2.default.createElement(
 					"div",
 					{ className: "table bordered" },
-					_react2.default.createElement(_lista2.default, null),
-					this.props.mascotas.map(function (pet) {
-						return _react2.default.createElement(
-							"div",
-							{ className: "filaPet" },
-							_react2.default.createElement(
-								"div",
-								null,
-								_react2.default.createElement(
-									"p",
-									null,
-									" ",
-									pet.name,
-									" - ",
-									pet.tipe
-								)
-							)
-						);
-					})
+					_react2.default.createElement(_tituloLista2.default, null),
+					_react2.default.createElement("br", null),
+					_react2.default.createElement(_filaLista2.default, { data: this.props.mascotas })
 				);
 			}
 		}]);
@@ -117,33 +105,37 @@
 
 	ClasePpal.defaultProps = {
 		mascotas: [{
+			id: "1",
 			name: "Phirulais",
 			tipe: "dog",
 			color: "brown",
 			age: 3,
-			picture: ""
+			picture: "https://www.cesarsway.com/sites/newcesarsway/files/styles/large_article_preview/public/Common-dog-behaviors-explained.jpg?itok=FSzwbBoi"
 		}, {
+			id: "2",
 			name: "Mishifus",
 			tipe: "cat",
 			color: "gray",
 			age: 2,
-			picture: ""
+			picture: "https://www.petfinder.com/wp-content/uploads/2012/11/91615172-find-a-lump-on-cats-skin-632x475.jpg"
 		}, {
+			id: "3",
 			name: "Alex",
 			tipe: "lion",
 			color: "yellow",
 			age: 4,
-			picture: ""
+			picture: "http://efdreams.com/data_images/dreams/lion/lion-03.jpg"
 		}, {
+			id: "4",
 			name: "Macri",
 			tipe: "cat",
 			color: "black",
 			age: 5,
-			picture: ""
+			picture: "http://elcorresponsalweb.com.ar/wp-content/uploads/2016/05/mauricio-macri-presidente.jpg"
 		}]
 	};
 
-	_reactDom2.default.render(_react2.default.createElement(ClasePpal, { name: "Alexander" }), document.getElementById("contenedorReact"));
+	_reactDom2.default.render(_react2.default.createElement(ClasePpal, null), document.getElementById("contenedorReact"));
 
 	/*
 
@@ -21667,7 +21659,7 @@
 			value: function render() {
 				return _react2.default.createElement(
 					"div",
-					{ className: "center100p" },
+					{ className: "center100p bordered paddTopBot" },
 					"Lista de Mascotas."
 				);
 			}
@@ -21677,6 +21669,200 @@
 	}(_react2.default.Component);
 
 	exports.default = ListaMascota;
+
+/***/ },
+/* 173 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _fotoMascota = __webpack_require__(174);
+
+	var _fotoMascota2 = _interopRequireDefault(_fotoMascota);
+
+	var _camposMascota = __webpack_require__(175);
+
+	var _camposMascota2 = _interopRequireDefault(_camposMascota);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var FilaLista = function (_React$Component) {
+		_inherits(FilaLista, _React$Component);
+
+		function FilaLista() {
+			_classCallCheck(this, FilaLista);
+
+			return _possibleConstructorReturn(this, (FilaLista.__proto__ || Object.getPrototypeOf(FilaLista)).apply(this, arguments));
+		}
+
+		_createClass(FilaLista, [{
+			key: "render",
+			value: function render() {
+				var mascotas = this.props.data.map(function (pet) {
+					return (
+						// Todos los elementos en un "repeat" tienen  que tener una unica key
+						_react2.default.createElement(
+							"div",
+							{ key: pet.id, className: "filaMascota" },
+							_react2.default.createElement(
+								"div",
+								{ className: "fotoMascota" },
+								_react2.default.createElement(_fotoMascota2.default, { data: pet })
+							),
+							_react2.default.createElement(
+								"div",
+								{ className: "camposMascota" },
+								_react2.default.createElement(_camposMascota2.default, { data: pet })
+							)
+						)
+					);
+				});
+				return _react2.default.createElement(
+					"div",
+					null,
+					mascotas
+				);
+			}
+		}]);
+
+		return FilaLista;
+	}(_react2.default.Component);
+
+	exports.default = FilaLista;
+
+/***/ },
+/* 174 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var FotoMascota = function (_React$Component) {
+		_inherits(FotoMascota, _React$Component);
+
+		function FotoMascota() {
+			_classCallCheck(this, FotoMascota);
+
+			return _possibleConstructorReturn(this, (FotoMascota.__proto__ || Object.getPrototypeOf(FotoMascota)).apply(this, arguments));
+		}
+
+		_createClass(FotoMascota, [{
+			key: "render",
+			value: function render() {
+				return (
+					// Todos los elementos en un "repeat" tienen  que tener una unica key
+					_react2.default.createElement("img", { className: "imagenMascota", src: this.props.data.picture })
+				);
+			}
+		}]);
+
+		return FotoMascota;
+	}(_react2.default.Component);
+
+	exports.default = FotoMascota;
+
+/***/ },
+/* 175 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var CampoMascota = function (_React$Component) {
+		_inherits(CampoMascota, _React$Component);
+
+		function CampoMascota() {
+			_classCallCheck(this, CampoMascota);
+
+			return _possibleConstructorReturn(this, (CampoMascota.__proto__ || Object.getPrototypeOf(CampoMascota)).apply(this, arguments));
+		}
+
+		_createClass(CampoMascota, [{
+			key: "render",
+			value: function render() {
+				var estiloColorMascota = {
+					backgroundColor: this.props.data.color
+				};
+				return _react2.default.createElement(
+					"div",
+					null,
+					_react2.default.createElement(
+						"div",
+						{ className: "nombreMascota boldLetra" },
+						this.props.data.name,
+						" ( ",
+						this.props.data.age,
+						" )"
+					),
+					_react2.default.createElement("br", null),
+					_react2.default.createElement(
+						"div",
+						{ className: "tipoMascota mitad" },
+						this.props.data.tipe
+					),
+					_react2.default.createElement(
+						"div",
+						{ className: "colorMascota mitad boldLetra", style: estiloColorMascota },
+						this.props.data.color
+					)
+				);
+			}
+		}]);
+
+		return CampoMascota;
+	}(_react2.default.Component);
+
+	exports.default = CampoMascota;
 
 /***/ }
 /******/ ]);
