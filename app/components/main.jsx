@@ -54,7 +54,7 @@ ClasePpal.defaultProps = {
 }
 
 ReactDOM.render(
-	<ClasePpal />,
+	<ClasePpal  />,
 	document.getElementById("contenedorReact")
 )
 
