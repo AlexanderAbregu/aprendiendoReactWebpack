@@ -60,7 +60,7 @@
 
 	var _tituloLista2 = _interopRequireDefault(_tituloLista);
 
-	var _filaLista = __webpack_require__(173);
+	var _filaLista = __webpack_require__(174);
 
 	var _filaLista2 = _interopRequireDefault(_filaLista);
 
@@ -81,18 +81,35 @@
 		function ClasePpal(props) {
 			_classCallCheck(this, ClasePpal);
 
-			return _possibleConstructorReturn(this, (ClasePpal.__proto__ || Object.getPrototypeOf(ClasePpal)).call(this, props));
+			var _this = _possibleConstructorReturn(this, (ClasePpal.__proto__ || Object.getPrototypeOf(ClasePpal)).call(this, props));
+
+			_this.state = {
+				filtro: ""
+			};
+
+			_this.resultar = _this.resultar.bind(_this);
+			return _this;
 		}
 
 		_createClass(ClasePpal, [{
+			key: "resultar",
+			value: function resultar() {
+				this.setState({ filtro: this.refs.titulo1.state.value });
+			}
+		}, {
 			key: "render",
 			value: function render() {
 				return _react2.default.createElement(
 					"div",
 					{ className: "table bordered" },
-					_react2.default.createElement(_tituloLista2.default, null),
+					_react2.default.createElement(_tituloLista2.default, { ref: "titulo1" }),
+					_react2.default.createElement(
+						"button",
+						{ onClick: this.resultar },
+						"Buscar 2"
+					),
 					_react2.default.createElement("br", null),
-					_react2.default.createElement(_filaLista2.default, { data: this.props.mascotas })
+					_react2.default.createElement(_filaLista2.default, { data: this.props.mascotas, filtro: this.state.filtro })
 				);
 			}
 		}]);
@@ -21637,7 +21654,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _buscadorMascota = __webpack_require__(177);
+	var _buscadorMascota = __webpack_require__(173);
 
 	var _buscadorMascota2 = _interopRequireDefault(_buscadorMascota);
 
@@ -21652,13 +21669,28 @@
 	var ListaMascota = function (_React$Component) {
 		_inherits(ListaMascota, _React$Component);
 
-		function ListaMascota() {
+		function ListaMascota(props) {
 			_classCallCheck(this, ListaMascota);
 
-			return _possibleConstructorReturn(this, (ListaMascota.__proto__ || Object.getPrototypeOf(ListaMascota)).apply(this, arguments));
+			// Estados, (solo se definen en el interior del componente)
+			var _this = _possibleConstructorReturn(this, (ListaMascota.__proto__ || Object.getPrototypeOf(ListaMascota)).call(this, props));
+
+			_this.state = {
+				value: ""
+			};
+
+			// Metodo principal para hacer cambios en la interfaz de usuario
+			// Establezco el this de la funcion como el this de React (creo)
+			_this.filtrar = _this.filtrar.bind(_this);
+			return _this;
 		}
 
 		_createClass(ListaMascota, [{
+			key: "filtrar",
+			value: function filtrar() {
+				this.setState({ value: this.refs.buscador1.state.value });
+			}
+		}, {
 			key: "render",
 			value: function render() {
 				return _react2.default.createElement(
@@ -21669,7 +21701,12 @@
 						null,
 						"Lista de Mascotas."
 					),
-					_react2.default.createElement(_buscadorMascota2.default, null)
+					_react2.default.createElement(_buscadorMascota2.default, { ref: "buscador1" }),
+					_react2.default.createElement(
+						"button",
+						{ onClick: this.filtrar },
+						"Buscar 1"
+					)
 				);
 			}
 		}]);
@@ -21686,6 +21723,97 @@
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var BuscadorMascota = function (_React$Component) {
+	  _inherits(BuscadorMascota, _React$Component);
+
+	  function BuscadorMascota(props) {
+	    _classCallCheck(this, BuscadorMascota);
+
+	    var _this = _possibleConstructorReturn(this, (BuscadorMascota.__proto__ || Object.getPrototypeOf(BuscadorMascota)).call(this, props));
+
+	    _this.state = {
+	      value: ""
+	    };
+	    _this.handleChange = _this.handleChange.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(BuscadorMascota, [{
+	    key: "handleChange",
+	    value: function handleChange(event) {
+	      this.setState({
+	        value: event.target.value
+	      });
+	    }
+	  }, {
+	    key: "componentWillUpdate",
+	    value: function componentWillUpdate(a) {
+	      //console.log(this.state.value);
+	    }
+	  }, {
+	    key: "componentDidUpdate",
+	    value: function componentDidUpdate(a) {
+	      //console.log(this.state.value);
+	    }
+	  }, {
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        { className: " paddTopBot" },
+	        _react2.default.createElement("input", { type: "text", placeholder: "Nombre", onChange: this.handleChange }),
+	        _react2.default.createElement(
+	          "select",
+	          { type: "text", placeholder: "Tipo" },
+	          _react2.default.createElement(
+	            "option",
+	            { value: "dog" },
+	            "Dog"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "cat" },
+	            "Cat"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "lion" },
+	            "Lion"
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return BuscadorMascota;
+	}(_react2.default.Component);
+
+	exports.default = BuscadorMascota;
+
+/***/ },
+/* 174 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
 
@@ -21695,11 +21823,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _fotoMascota = __webpack_require__(174);
+	var _fotoMascota = __webpack_require__(175);
 
 	var _fotoMascota2 = _interopRequireDefault(_fotoMascota);
 
-	var _camposMascota = __webpack_require__(175);
+	var _camposMascota = __webpack_require__(177);
 
 	var _camposMascota2 = _interopRequireDefault(_camposMascota);
 
@@ -21711,8 +21839,40 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var FilaLista = function (_React$Component) {
-		_inherits(FilaLista, _React$Component);
+	var FilaLoca = function (_React$Component) {
+		_inherits(FilaLoca, _React$Component);
+
+		function FilaLoca() {
+			_classCallCheck(this, FilaLoca);
+
+			return _possibleConstructorReturn(this, (FilaLoca.__proto__ || Object.getPrototypeOf(FilaLoca)).apply(this, arguments));
+		}
+
+		_createClass(FilaLoca, [{
+			key: "render",
+			value: function render() {
+				return _react2.default.createElement(
+					"div",
+					{ className: "filaMascota" },
+					_react2.default.createElement(
+						"div",
+						{ className: "fotoMascota" },
+						_react2.default.createElement(_fotoMascota2.default, { data: this.props.pet })
+					),
+					_react2.default.createElement(
+						"div",
+						{ className: "camposMascota" },
+						_react2.default.createElement(_camposMascota2.default, { data: this.props.pet })
+					)
+				);
+			}
+		}]);
+
+		return FilaLoca;
+	}(_react2.default.Component);
+
+	var FilaLista = function (_React$Component2) {
+		_inherits(FilaLista, _React$Component2);
 
 		function FilaLista() {
 			_classCallCheck(this, FilaLista);
@@ -21721,25 +21881,17 @@
 		}
 
 		_createClass(FilaLista, [{
+			key: "componentDidUpdate",
+			value: function componentDidUpdate() {
+				console.log("Filtro:" + this.props.filtro);
+			}
+		}, {
 			key: "render",
 			value: function render() {
 				var mascotas = this.props.data.map(function (pet) {
 					return (
 						// Todos los elementos en un "repeat" tienen  que tener una unica key
-						_react2.default.createElement(
-							"div",
-							{ key: pet.id, className: "filaMascota" },
-							_react2.default.createElement(
-								"div",
-								{ className: "fotoMascota" },
-								_react2.default.createElement(_fotoMascota2.default, { data: pet })
-							),
-							_react2.default.createElement(
-								"div",
-								{ className: "camposMascota" },
-								_react2.default.createElement(_camposMascota2.default, { data: pet })
-							)
-						)
+						_react2.default.createElement(FilaLoca, { key: pet.id, pet: pet })
 					);
 				});
 				return _react2.default.createElement(
@@ -21756,7 +21908,7 @@
 	exports.default = FilaLista;
 
 /***/ },
-/* 174 */
+/* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -21833,76 +21985,6 @@
 	}(_react2.default.Component);
 
 	exports.default = FotoMascota;
-
-/***/ },
-/* 175 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var CampoMascota = function (_React$Component) {
-		_inherits(CampoMascota, _React$Component);
-
-		function CampoMascota() {
-			_classCallCheck(this, CampoMascota);
-
-			return _possibleConstructorReturn(this, (CampoMascota.__proto__ || Object.getPrototypeOf(CampoMascota)).apply(this, arguments));
-		}
-
-		_createClass(CampoMascota, [{
-			key: "render",
-			value: function render() {
-				var estiloColorMascota = {
-					backgroundColor: this.props.data.color
-				};
-				return _react2.default.createElement(
-					"div",
-					null,
-					_react2.default.createElement(
-						"div",
-						{ className: "nombreMascota boldLetra" },
-						this.props.data.name,
-						" ( ",
-						this.props.data.age,
-						" )"
-					),
-					_react2.default.createElement("br", null),
-					_react2.default.createElement(
-						"div",
-						{ className: "tipoMascota mitad" },
-						this.props.data.tipe
-					),
-					_react2.default.createElement(
-						"div",
-						{ className: "colorMascota mitad boldLetra", style: estiloColorMascota },
-						this.props.data.color
-					)
-				);
-			}
-		}]);
-
-		return CampoMascota;
-	}(_react2.default.Component);
-
-	exports.default = CampoMascota;
 
 /***/ },
 /* 176 */
@@ -32154,67 +32236,51 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var BuscadorMascota = function (_React$Component) {
-		_inherits(BuscadorMascota, _React$Component);
+	var CampoMascota = function (_React$Component) {
+		_inherits(CampoMascota, _React$Component);
 
-		function BuscadorMascota(props) {
-			_classCallCheck(this, BuscadorMascota);
+		function CampoMascota() {
+			_classCallCheck(this, CampoMascota);
 
-			var _this = _possibleConstructorReturn(this, (BuscadorMascota.__proto__ || Object.getPrototypeOf(BuscadorMascota)).call(this, props));
-
-			_this.state = {
-				value: ''
-			};
-			_this.handleChange = _this.handleChange.bind(_this);
-			return _this;
+			return _possibleConstructorReturn(this, (CampoMascota.__proto__ || Object.getPrototypeOf(CampoMascota)).apply(this, arguments));
 		}
 
-		_createClass(BuscadorMascota, [{
-			key: "handleChange",
-			value: function handleChange(event) {
-				this.setState({
-					value: event.target.value
-				});
-			}
-		}, {
-			key: "componentWillUpdate",
-			value: function componentWillUpdate() {
-				console.log("SE ACTUALIZO");
-			}
-		}, {
+		_createClass(CampoMascota, [{
 			key: "render",
 			value: function render() {
+				var estiloColorMascota = {
+					backgroundColor: this.props.data.color
+				};
 				return _react2.default.createElement(
 					"div",
-					{ className: " paddTopBot" },
-					_react2.default.createElement("input", { type: "text", placeholder: "Nombre", value: this.state.buscadorNombre, onChange: this.handleChange }),
+					null,
 					_react2.default.createElement(
-						"select",
-						{ type: "text", placeholder: "Tipo" },
-						_react2.default.createElement(
-							"option",
-							{ value: "dog" },
-							"Dog"
-						),
-						_react2.default.createElement(
-							"option",
-							{ value: "cat" },
-							"Cat"
-						),
-						_react2.default.createElement(
-							"option",
-							{ value: "lion" },
-							"Lion"
-						)
+						"div",
+						{ className: "nombreMascota boldLetra" },
+						this.props.data.name,
+						" ( ",
+						this.props.data.age,
+						" )"
+					),
+					_react2.default.createElement("br", null),
+					_react2.default.createElement(
+						"div",
+						{ className: "tipoMascota mitad" },
+						this.props.data.tipe
+					),
+					_react2.default.createElement(
+						"div",
+						{ className: "colorMascota mitad boldLetra", style: estiloColorMascota },
+						this.props.data.color
 					)
 				);
 			}
 		}]);
 
-		return BuscadorMascota;
+		return CampoMascota;
 	}(_react2.default.Component);
 
-	exports.default = BuscadorMascota;
+	exports.default = CampoMascota;
 
 /***/ }
 /******/ ]);

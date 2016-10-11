@@ -7,16 +7,28 @@ import FilaLista from "./componentes/filaLista.jsx";
 
 class ClasePpal extends React.Component{
 	constructor(props){
-			super(props);
+		super(props);
+
+		this.state = {
+			filtro: ""
 		}
+
+		this.resultar = this.resultar.bind(this);
+	}
+
+	resultar(){
+		this.setState({filtro: this.refs.titulo1.state.value});
+	}
 
 	render(){
 		return (
 			<div className="table bordered">
-				<TituloLista />
+				<TituloLista ref="titulo1"/>
+				<button onClick={this.resultar}>Buscar 2</button>
 				<br/>
-				<FilaLista data={this.props.mascotas} />
-			</div>)
+				<FilaLista data={this.props.mascotas} filtro={this.state.filtro}/>
+			</div>
+			)
 		}
 }
 

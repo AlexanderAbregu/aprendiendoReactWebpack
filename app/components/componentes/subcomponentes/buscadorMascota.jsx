@@ -4,7 +4,7 @@ class BuscadorMascota extends React.Component{
 	constructor(props) {
    		super(props);
     		this.state = {
-    			value: ''
+    			value: ""
     		};
     		this.handleChange = this.handleChange.bind(this);
   	}
@@ -14,13 +14,16 @@ class BuscadorMascota extends React.Component{
     			value: event.target.value
     		});
   	}
-	componentWillUpdate(){
-  		console.log("SE ACTUALIZO");
+	componentWillUpdate(a){
+  		//console.log(this.state.value);
+   	}
+   	componentDidUpdate(a){
+  		//console.log(this.state.value);
    	}
 	render(){
 		return (
 				<div className=" paddTopBot">
-					<input type="text" placeholder="Nombre" value={this.state.buscadorNombre} onChange={this.handleChange} />
+					<input type="text" placeholder="Nombre" onChange={this.handleChange} />
 					<select type="text" placeholder="Tipo">
 						<option value="dog">Dog</option>
 						<option value="cat">Cat</option>
